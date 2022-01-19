@@ -1,210 +1,200 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>计算日期</title>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html body {
+            margin: 0;
+            padding: 0;
+            font-family: Helvetica, sans-serif;
+        }
+
+        .container {
+            min-width: 100vw;
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .container .page {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                overflow: hidden;
+                width: 375px;
+                height: 812px;
+                border-radius: 36px;
+                background: #e3e6ec;
+                background-image: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+            }
+
+                .container .page .top {
+                    width: 375px;
+                    height: 568px;
+                    background-image: linear-gradient(0deg, rgba(67, 216, 205, 0.01) 2%, rgba(47, 185, 202, 0.3) 100%);
+                }
+    </style>
 </head>
+
 <body>
+    <div class="container">
+        <div class="page">
+            <div class="top">
 
-<style>
-    .allday {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 5.5rem;
-        font-size: 0.35rem;
-    }
-    input[type=date]::-webkit-inner-spin-button {
-        visibility: hidden;
-    }
-    input[type="date"]::-webkit-calendar-picker-indicator {
-        display: none;
-    }
-    input[type=date]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-    }
-    input[type=date]::-webkit-inner-spin-button, input[type=number]::-webkit-inner-spin-button, input[type=date]::-webkit-clear-button {
-        visibility: hidden;
-    }
-    input[type=select]::-webkit-inner-spin-button, input[type=select]::-webkit-inner-spin-button, input[type=select]::-webkit-clear-button {
-        visibility: hidden;
-    }
-    html, body {
-        height: 100%;
-    }
-    input[type="date"]::-webkit-clear-button {
-        display: none;
-        visibility: hidden;
-    }
-    .btn:focus,
-    .btn:active:focus,
-    .btn.active:focus,
-    .btn.focus,
-    .btn:active.focus,
-    .btn.active.focus {
-        outline: none;
-    }
-	
-	.panel{
-		background-image: linear-gradient(
-			0deg, 
-			rgba(67,216,205,0.01) 2%,
-			rgba(47,186,202,0.3) 100%
-			);
-	}
-</style>
-<div class="container" style=" height :100%">
-    <div class="panel panel-info " style=" height :100%">
-        <div class="panel-body" style="height: calc(100% - 90px);overflow: auto;">
+                <div class="container" style=" height :100%">
+                    <div class="panel panel-info " style=" height :100%">
+                        <div class="panel-body" style="height: calc(100% - 90px);overflow: auto;">
 
-            <div class="form-inline" style="margin-top: 50%;">
-                <div class="form-group">
-                    <label class="sr-only" for="sDate"></label>
-                    <div class="input-group">
-                        <div class="input-group-addon">生产日期</div>
-                        <input type="date" class="form-control" id="sDate" placeholder="" onchange="change()">
-                    </div>
-                </div>
-                <div class="form-inline">
-                    <div class="form-group">
-                        <label class="sr-only" for="Month"></label>
-                        <div class="input-group">
-                            <div class="input-group-addon">保质月份</div>
-                            <select class="form-control" id="Month" onchange="change()">
-                                <option value="0" class="hide"></option>
-                                <option value="1">1个月(30天)</option>
-                                <option value="2">2个月(60天)</option>
-                                <option value="3">3个月(90天)</option>
-                                <option value="4">4个月(120天)</option>
-                                <option value="5">5个月(150天)</option>
-                                <option value="6">6个月(180天)</option>
-                                <option value="7">7个月(210天)</option>
-                                <option value="8">8个月(240天)</option>
-                                <option value="9">9个月(270天)</option>
-                                <option value="10">10个月(300天)</option>
-                                <option value="11">11个月(330天)</option>
-                                <option value="12">12个月(360天)</option>
-                                <option value="13">13个月(390天)</option>
-                                <option value="14">14个月(420天)</option>
-                                <option value="15">15个月(450天)</option>
-                                <option value="16">16个月(480天)</option>
-                                <option value="17">17个月(510天)</option>
-                                <option value="18">18个月(540天)</option>
-                                <option value="19">19个月(570天)</option>
-                                <option value="20">20个月(600天)</option>
-                                <option value="21">21个月(630天)</option>
-                                <option value="22">22个月(660天)</option>
-                                <option value="23">23个月(690天)</option>
-                                <option value="24">24个月(720天)</option>
-                            </select>
+                            <div class="form-inline" style="margin-top: 50%;">
+                                <div class="form-group">
+                                    <label class="sr-only" for="sDate"></label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">生产日期</div>
+                                        <input type="date" class="form-control" id="sDate" placeholder="" onchange="change()">
+                                    </div>
+                                </div>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="Month"></label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">保质月份</div>
+                                            <select class="form-control" id="Month" onchange="change()">
+                                                <option value="0" class="hide"></option>
+                                                <option value="1">1个月(30天)</option>
+                                                <option value="2">2个月(60天)</option>
+                                                <option value="3">3个月(90天)</option>
+                                                <option value="4">4个月(120天)</option>
+                                                <option value="5">5个月(150天)</option>
+                                                <option value="6">6个月(180天)</option>
+                                                <option value="7">7个月(210天)</option>
+                                                <option value="8">8个月(240天)</option>
+                                                <option value="9">9个月(270天)</option>
+                                                <option value="10">10个月(300天)</option>
+                                                <option value="11">11个月(330天)</option>
+                                                <option value="12">12个月(360天)</option>
+                                                <option value="13">13个月(390天)</option>
+                                                <option value="14">14个月(420天)</option>
+                                                <option value="15">15个月(450天)</option>
+                                                <option value="16">16个月(480天)</option>
+                                                <option value="17">17个月(510天)</option>
+                                                <option value="18">18个月(540天)</option>
+                                                <option value="19">19个月(570天)</option>
+                                                <option value="20">20个月(600天)</option>
+                                                <option value="21">21个月(630天)</option>
+                                                <option value="22">22个月(660天)</option>
+                                                <option value="23">23个月(690天)</option>
+                                                <option value="24">24个月(720天)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <br />
+                                    <div class="form-group" style="width:100%">
+                                        <label class="sr-only" for="eDate"></label>
+                                        <div class="input-group" id="eDate" style="width:100%">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="width:100%">
+                                        <label class="sr-only" for="dDate"></label>
+                                        <div class="input-group" id="dDate" style="width:100%">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <br />
+                        <br />
+                        <div class="panel-footer" style=" text-align:right ">Copyright © 2022 <a style=" text-decoration: none;" href="https://github.com/zimo1213">ZM</a>  All Rights Reserved.</div>
                     </div>
-
-                    <button type="button" class="btn btn-info btn btn-block hidden" onclick="calc()">计算</button>
-
-                    <hr />
-                    <div class="form-group" style="width:100%">
-                        <label class="sr-only" for="eDate"></label>
-                        <div class="input-group" id="eDate" style="width:100%">
-                        </div>
-                    </div>
-                    <div class="form-group" style="width:100%">
-                        <label class="sr-only" for="dDate"></label>
-                        <div class="input-group" id="dDate" style="width:100%">
-                        </div>
-                    </div>
+                    <script>
+                        document.getElementById('sDate').valueAsDate = new Date();
+                        function change() {
+                            $("#eDate").hide();
+                            $("#dDate").hide();
+                            if (document.getElementById('Month').selectedIndex != 0) {
+                                calc();
+                            }
+                            document.getElementById('sDate').blur();
+                            document.getElementById('Month').blur();
+                        }
+                        $(function () {
+                        });
+                        function calc() {
+                            $("#eDate").fadeTo(500, 1.0);
+                            $("#dDate").fadeTo(500, 1.0);
+                            //document.getElementById('eDate').value = document.getElementById('sDate').valueAsDate.addMonth(document.getElementById('Month').selectedIndex).Format("yyyy-MM-dd");
+                            var val = document.getElementById('sDate').valueAsDate.addMonth(document.getElementById('Month').selectedIndex).Format("yyyy年MM月dd日");
+                            var val2 = document.getElementById('sDate').valueAsDate.addMonth(document.getElementById('Month').selectedIndex).Format("yyyy-MM-dd");
+                            document.getElementById('eDate').innerHTML = ' <div class="alert alert-info" style="width:100%" role="alert"><p class="lead">过期日期</p><h1 style="text-align:center"><strong><span >' + val + '</span></strong></h1></div>';
+                            var day = Math.ceil(((new Date(val2) - new Date()) / (1000 * 60 * 60 * 24)));
+                            if (day < 30) {
+                                document.getElementById('dDate').innerHTML = ' <br/> <br/> <br/> <div class="alert alert-danger" style="width:100%" role="alert"><p class="lead">距离过期</p><h1 style="text-align:center"><small>还有</small><kbd><strong>' + day + '</strong></kbd><small>天</small></h1></div>';
+                            } else if (day < 60) {
+                                document.getElementById('dDate').innerHTML = ' <br/><br/> <br/>  <div class="alert alert-warning" style="width:100%" role="alert"><p class="lead">距离过期</p><h1 style="text-align:center"><small>还有</small><kbd><strong>' + day + '</strong></kbd><small>天</small></h1></div>';
+                            } else {
+                                document.getElementById('dDate').innerHTML = ' <br/> <br/> <br/> <div class="alert alert-success" style="width:100%" role="alert"><p class="lead">距离过期</p><h1 style="text-align:center"><small>还有</small><kbd><strong>' + day + '</strong></kbd><small>天</small></h1></div>';
+                            }
+                        }
+                        Date.prototype.Format = function (fmt) { //author: meizz
+                            var o = {
+                                "M+": this.getMonth() + 1,                 //月份
+                                "d+": this.getDate(),                    //日
+                                "h+": this.getHours(),                   //小时
+                                "m+": this.getMinutes(),                 //分
+                                "s+": this.getSeconds(),                 //秒
+                                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                                "S": this.getMilliseconds()             //毫秒
+                            };
+                            if (/(y+)/.test(fmt))
+                                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+                            for (var k in o)
+                                if (new RegExp("(" + k + ")").test(fmt))
+                                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                            return fmt;
+                        }
+                        Date.prototype.addMonth = function (addMonth) {
+                            var y = this.getFullYear();
+                            var m = this.getMonth();
+                            var nextY = y;
+                            var nextM = m;
+                            //如果当前月+要加上的月>11 这里之所以用11是因为 js的月份从0开始
+                            if ((m + addMonth) > 11) {
+                                nextY = y + 1;
+                                nextM = parseInt(m + addMonth) - 12;
+                            } else {
+                                nextM = this.getMonth() + addMonth
+                            }
+                            var daysInNextMonth = Date.daysInMonth(nextY, nextM);
+                            var day = this.getDate();
+                            if (day > daysInNextMonth) {
+                                day = daysInNextMonth;
+                            }
+                            return new Date(nextY, nextM, day - 1);
+                        };
+                        Date.daysInMonth = function (year, month) {
+                            if (month == 1) {
+                                if (year % 4 == 0 && year % 100 != 0)
+                                    return 29;
+                                else
+                                    return 28;
+                            } else if ((month <= 6 && month % 2 == 0) || (month = 6 && month % 2 == 1))
+                                return 31;
+                            else
+                                return 30;
+                        };
+                    </script>
                 </div>
             </div>
         </div>
-        <br />
-        <br />
-        <div class="panel-footer" style=" text-align:right ">Copyright © 2022 <a style=" text-decoration: none;" href="https://github.com/zimo1213">ZM</a>  All Rights Reserved.</div>
     </div>
-    <script>
-        document.getElementById('sDate').valueAsDate = new Date();
-        function change() {
-            $("#eDate").hide();
-            $("#dDate").hide();
-            if (document.getElementById('Month').selectedIndex != 0) {
-                calc();
-            }
-            document.getElementById('sDate').blur();
-            document.getElementById('Month').blur();
-        }
-        $(function () {
-        });
-        function calc() {
-            $("#eDate").fadeTo(500, 1.0);
-            $("#dDate").fadeTo(500, 1.0);
-            //document.getElementById('eDate').value = document.getElementById('sDate').valueAsDate.addMonth(document.getElementById('Month').selectedIndex).Format("yyyy-MM-dd");
-            var val = document.getElementById('sDate').valueAsDate.addMonth(document.getElementById('Month').selectedIndex).Format("yyyy年MM月dd日");
-            var val2 = document.getElementById('sDate').valueAsDate.addMonth(document.getElementById('Month').selectedIndex).Format("yyyy-MM-dd");
-            document.getElementById('eDate').innerHTML = ' <div class="alert alert-info" style="width:100%" role="alert"><p class="lead">过期日期</p><h1 style="text-align:center"><strong><span >' + val + '</span></strong></h1></div>';
-            var day = Math.ceil(((new Date(val2) - new Date()) / (1000 * 60 * 60 * 24)));
-            if (day < 30) {
-                document.getElementById('dDate').innerHTML = ' <div class="alert alert-danger" style="width:100%" role="alert"><p class="lead">距离过期</p><h1 style="text-align:center"><small>还有</small><kbd><strong>' + day + '</strong></kbd><small>天</small></h1></div>';
-            } else if (day < 60) {
-                document.getElementById('dDate').innerHTML = ' <div class="alert alert-warning" style="width:100%" role="alert"><p class="lead">距离过期</p><h1 style="text-align:center"><small>还有</small><kbd><strong>' + day + '</strong></kbd><small>天</small></h1></div>';
-            } else {
-                document.getElementById('dDate').innerHTML = ' <div class="alert alert-success" style="width:100%" role="alert"><p class="lead">距离过期</p><h1 style="text-align:center"><small>还有</small><kbd><strong>' + day + '</strong></kbd><small>天</small></h1></div>';
-            }
-        }
-        Date.prototype.Format = function (fmt) { //author: meizz
-            var o = {
-                "M+": this.getMonth() + 1,                 //月份
-                "d+": this.getDate(),                    //日
-                "h+": this.getHours(),                   //小时
-                "m+": this.getMinutes(),                 //分
-                "s+": this.getSeconds(),                 //秒
-                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-                "S": this.getMilliseconds()             //毫秒
-            };
-            if (/(y+)/.test(fmt))
-                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            for (var k in o)
-                if (new RegExp("(" + k + ")").test(fmt))
-                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            return fmt;
-        }
-        Date.prototype.addMonth = function (addMonth) {
-            var y = this.getFullYear();
-            var m = this.getMonth();
-            var nextY = y;
-            var nextM = m;
-            //如果当前月+要加上的月>11 这里之所以用11是因为 js的月份从0开始
-            if ((m + addMonth) > 11) {
-                nextY = y + 1;
-                nextM = parseInt(m + addMonth) - 12;
-            } else {
-                nextM = this.getMonth() + addMonth
-            }
-            var daysInNextMonth = Date.daysInMonth(nextY, nextM);
-            var day = this.getDate();
-            if (day > daysInNextMonth) {
-                day = daysInNextMonth;
-            }
-            return new Date(nextY, nextM, day - 1);
-        };
-        Date.daysInMonth = function (year, month) {
-            if (month == 1) {
-                if (year % 4 == 0 && year % 100 != 0)
-                    return 29;
-                else
-                    return 28;
-            } else if ((month <= 6 && month % 2 == 0) || (month = 6 && month % 2 == 1))
-                return 31;
-            else
-                return 30;
-        };
-    </script>
-</div>
-
-
 </body>
+
 </html>
