@@ -88,10 +88,10 @@
       document.getElementById('result').innerHTML = `
         <div class="cards-container">
           <div class="card">
-            <div>过期日期：<span class="highlight">${expiryDate.toISOString().split('T')[0]}</span></div>
+            <div>过期日期：<br/> <span class="highlight">${expiryDate.toISOString().split('T')[0]}</span></div>
           </div>
           <div class="card ${resultClass}">
-            <div class="highlight">距离今天：${Math.abs(daysDifference)} 天</div>
+            <div class="highlight">距离今天：<br/>${Math.abs(daysDifference)} 天</div>
           </div>
         </div>
       `;
@@ -108,7 +108,7 @@
 
   <label for="shelfLife">保质期(月份):</label>
   <select id="shelfLife" name="shelfLife" onchange="calculateExpiry()">
-    <option value="0" class="hide"></option>
+        <option value="">请选择...</option>
 	<option value="1">1个月(30天)</option>
 	<option value="2">2个月(60天)</option>
 	<option value="3">3个月(90天)</option>
