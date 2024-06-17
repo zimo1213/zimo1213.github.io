@@ -12,8 +12,9 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f9f9f9;
+    background-color: #f9f9f9; /* 初始背景颜色 */
     margin: 0;
+    transition: background-color 0.5s; /* 添加过渡效果 */
   }
   h2 {
     color: #333;
@@ -67,6 +68,13 @@
     width: 100%;
     max-width: 600px;
     box-sizing: border-box;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
   }
   .highlight {
     font-size: 1.2em;
@@ -116,18 +124,20 @@
       let message;
       let resultClass;
       if (daysDifference > 0) {
-        message = `距离今天还有<br/> ${daysDifference} 天`;
+        message = `距离今天还有 ${daysDifference} 天`;
         resultClass = 'green';
+        document.body.style.backgroundColor = '#f9f9f9'; // 未过期，背景颜色不变
       } else {
-        message = `已过期<br/> ${Math.abs(daysDifference)} 天`;
+        message = `已过期 ${Math.abs(daysDifference)} 天`;
         resultClass = 'red';
+        document.body.style.backgroundColor = '#f2dede'; // 过期，背景颜色变红
       }
 
       // 显示结果
       document.getElementById('result').innerHTML = `
         <div class="cards-container">
           <div class="card expiry-card">
-		  <div>过期日期是：<br/><span class="highlight">${expiryDate.toISOString().split('T')[0]}</span></div>
+            <div>过期日期是：<span class="highlight">${expiryDate.toISOString().split('T')[0]}</span></div>
           </div>
           <div class="card ${resultClass}">
             <div class="highlight">${message}</div>
@@ -139,6 +149,7 @@
       document.getElementById('result-container').style.display = 'block';
     } else {
       document.getElementById('result').innerHTML = '请填写所有字段';
+      document.body.style.backgroundColor = '#f9f9f9'; // 恢复初始背景颜色
     }
   }
 </script>
@@ -150,31 +161,30 @@
 
     <label for="shelfLife">保质期(月份):</label>
     <select id="shelfLife" name="shelfLife" onchange="calculateExpiry()">
-      <option value="">请选择...</option>
-	<option value="1">1个月</option>
-	<option value="2">2个月</option>
-	<option value="3">3个月</option>
-	<option value="4">4个月</option>
-	<option value="5">5个月</option>
-	<option value="6">6个月</option>
-	<option value="7">7个月</option>
-	<option value="8">8个月</option>
-	<option value="9">9个月</option>
-	<option value="10">10个月</option>
-	<option value="11">11个月</option>
-	<option value="12">12个月</option>
-	<option value="13">13个月</option>
-	<option value="14">14个月</option>
-	<option value="15">15个月</option>
-	<option value="16">16个月</option>
-	<option value="17">17个月</option>
-	<option value="18">18个月</option>
-	<option value="19">19个月</option>
-	<option value="20">20个月</option>
-	<option value="21">21个月</option>
-	<option value="22">22个月</option>
-	<option value="23">23个月</option>
-	<option value="24">24个月</option>
+		<option value="1">1个月</option>
+		<option value="2">2个月</option>
+		<option value="3">3个月</option>
+		<option value="4">4个月</option>
+		<option value="5">5个月</option>
+		<option value="6">6个月</option>
+		<option value="7">7个月</option>
+		<option value="8">8个月</option>
+		<option value="9">9个月</option>
+		<option value="10">10个月</option>
+		<option value="11">11个月</option>
+		<option value="12">12个月</option>
+		<option value="13">13个月</option>
+		<option value="14">14个月</option>
+		<option value="15">15个月</option>
+		<option value="16">16个月</option>
+		<option value="17">17个月</option>
+		<option value="18">18个月</option>
+		<option value="19">19个月</option>
+		<option value="20">20个月</option>
+		<option value="21">21个月</option>
+		<option value="22">22个月</option>
+		<option value="23">23个月</option>
+		<option value="24">24个月</option>
     </select>
 
     <div id="result-container" style="display: none;">
