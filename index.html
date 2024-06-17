@@ -60,8 +60,8 @@
   }
   .card {
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
     text-align: center;
     background-color: #fff;
     margin-bottom: 20px;
@@ -77,16 +77,16 @@
     }
   }
   .highlight {
-    font-size: 1.2em;
+    font-size: 2.8em;
     font-weight: bold;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
   }
   .expiry-card {
     background-color: #e8f5e9; /* 清新的绿色背景 */
     border: 1px solid #a5d6a7;
     color: #2e7d32;
-    box-shadow: 0 0 10px rgba(0, 128, 0, 0.2);
+    box-shadow: 0 0 0px rgba(0, 128, 0, 0.2);
   }
   .green {
     background-color: #dff0d8;
@@ -122,13 +122,14 @@
 
       // 设置显示的文案和样式
       let message;
+	  let days = `${Math.abs(daysDifference)} 天`;
       let resultClass;
       if (daysDifference > 0) {
-        message = `距离今天还有 ${daysDifference} 天`;
+        message = `距离今天还有`;
         resultClass = 'green';
         document.body.style.backgroundColor = '#f9f9f9'; // 未过期，背景颜色不变
       } else {
-        message = `已过期 ${Math.abs(daysDifference)} 天`;
+        message = `已过期`;
         resultClass = 'red';
         document.body.style.backgroundColor = '#f2dede'; // 过期，背景颜色变红
       }
@@ -140,7 +141,7 @@
             <div>过期日期是：<span class="highlight">${expiryDate.toISOString().split('T')[0]}</span></div>
           </div>
           <div class="card ${resultClass}">
-            <div class="highlight">${message}</div>
+            <div>${message}：<span class="highlight">${days}</span></div>
           </div>
         </div>
       `;
