@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -5,224 +6,284 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>计算日期</title>
 <style>
-	
-/* 隐藏原生的箭头 */
-	select,input {
-	    -webkit-appearance: none; /* Safari 和 Chrome */
-	    -moz-appearance: none; /* Firefox */
-	    appearance: none; /* 其他浏览器 */
-	    padding: 10px;
-	    font-size: 16px;
-	    border: 1px solid #ccc;
-	    border-radius: 0px;
-	    background: white; /* 确保背景色与容器背景色一致 */
+	/* 隐藏原生的箭头 */
+	select, input {
+		-webkit-appearance: none; /* Safari 和 Chrome */
+		-moz-appearance: none; /* Firefox */
+		appearance: none; /* 其他浏览器 */
+		padding: 10px;
+		font-size: 16px;
+		border: 1px solid #ccc;
+		border-radius: 0px;
+		background: white; /* 确保背景色与容器背景色一致 */
 	}
-	
-	/* 容器样式 */
-	.custom-select {
-	    position: relative;
-	    display: inline-block;
-	    width: 200px; /* 根据需要调整宽度 */
+	body {
+		font-family: Arial, sans-serif;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100vh;
+		background-color: #f9f9f9; /* 初始背景颜色 */
+		margin: 0;
+		transition: background-color 0.5s; /* 添加过渡效果 */
 	}
-	
-	/* 自定义箭头 */
-	.custom-select::after {
-	    content: '▼'; /* 自定义箭头字符，可以用其他符号或图片 */
-	    font-size: 12px;
-	    color: #333;
-	    position: absolute;
-	    top: 50%;
-	    right: 10px; /* 调整位置 */
-	    pointer-events: none; /* 禁止点击箭头 */
-	    transform: translateY(-50%);
+	h2 {
+		color: #333;
+		text-align: center;
 	}
-  body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f9f9f9; /* 初始背景颜色 */
-    margin: 0;
-    transition: background-color 0.5s; /* 添加过渡效果 */
-  }
-  h2 {
-    color: #333;
-    text-align: center;
-  }
-  .form-container {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  input, select {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 0px;
-    box-sizing: border-box;
-  }
-  #result-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 300px; /* 固定高度 */
-    width: 100%;
-    max-width: 600px;
-    overflow: auto; /* 自动滚动条 */
-    margin-top: 20px;
-  }
-  .cards-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  .card {
-    padding: 20px;
-    border-radius: 0px;
-    box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    background-color: #fff;
-    margin-bottom: 20px;
-    width: 100%;
-    max-width: 600px;
-    box-sizing: border-box;
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-  }
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
-  }
-  .highlight {
-    font-size: 2.8em;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 0px;
-  }
-  .expiry-card {
-    background-color: #e8f5e9; /* 清新的绿色背景 */
-    border: 1px solid #a5d6a7;
-    color: #2e7d32;
-    box-shadow: 0 0 0px rgba(0, 128, 0, 0.2);
-  }
-  .green {
-    background-color: #dff0d8;
-    border: 1px solid #d6e9c6;
-    color: #3c763d;
-    box-shadow: 0 0 10px rgba(0, 128, 0, 0.3);
-  }
-  .red {
-    background-color: #f2dede;
-    border: 1px solid #ebccd1;
-    color: #a94442;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-  }
+	.form-container {
+		width: 100%;
+		max-width: 600px;
+		padding: 20px;
+		box-sizing: border-box;
+	}
+	label {
+		display: block;
+		margin-bottom: 10px;
+		font-weight: bold;
+	}
+	input, select {
+		display: block;
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 20px;
+		font-size: 16px;
+		border: 1px solid #ccc;
+		border-radius: 0px;
+		box-sizing: border-box;
+	}
+	#result-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 300px; /* 固定高度 */
+		width: 100%;
+		max-width: 600px;
+		overflow: auto; /* 自动滚动条 */
+		margin-top: 20px;
+	}
+	.cards-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}
+	.card {
+		padding: 20px;
+		border-radius: 0px;
+		box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
+		text-align: center;
+		background-color: #fff;
+		margin-bottom: 20px;
+		width: 100%;
+		max-width: 600px;
+		box-sizing: border-box;
+		opacity: 0;
+		animation: fadeIn 1s forwards;
+	}
+	@keyframes fadeIn {
+		to {
+		  opacity: 1;
+		}
+	}
+	.highlight {
+		font-size: 2.5em;
+		font-weight: bold;
+		display: block;
+		margin-bottom: 0px;
+	}
+	.expiry-card {
+		background-color: #e8f5e9; /* 清新的绿色背景 */
+		border: 1px solid #a5d6a7;
+		color: #2e7d32;
+		box-shadow: 0 0 0px rgba(0, 128, 0, 0.2);
+	}
+	.green {
+		background-color: #dff0d8;
+		border: 1px solid #d6e9c6;
+		color: #3c763d;
+		box-shadow: 0 0 10px rgba(0, 128, 0, 0.3);
+	}
+	.red {
+		background-color: #f2dede;
+		border: 1px solid #ebccd1;
+		color: #a94442;
+		box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+	}
+	/* 为下拉框外部容器设置左右布局 */
+	.select-container {
+		display: flex;
+		justify-content: space-between;
+		gap: 10px; /* 控制两个下拉框之间的间距，可以根据需要调整 */
+	}
+
+	/* 确保两个下拉框宽度合理 */
+	.select-container select {
+		flex: 1;
+		max-width: 45%; /* 确保两个下拉框在容器内分布合理 */
+	}
+
 </style>
 <script>
-  function calculateExpiry() {
-    const productionDateValue = document.getElementById('productionDate').value;
-    const shelfLifeMonths = parseInt(document.getElementById('shelfLife').value);
+	function setDefaultDate() {
+		const today = new Date();
+		const year = today.getFullYear();
+		const month = String(today.getMonth() + 1).padStart(2, '0'); // 月份需要+1，因为月份从0开始计数
+		const day = String(today.getDate()).padStart(2, '0');
+		const formattedDate = `${year}-${month}-${day}`;
+		document.getElementById('productionDate').value = formattedDate;
+		// calculateExpiry(); // 默认日期设置后立即计算一次结果
+	}
 
-    if (productionDateValue && !isNaN(shelfLifeMonths)) {
-      const productionDate = new Date(productionDateValue);
+	function calculateExpiry() {
+		const productionDateValue = document.getElementById('productionDate').value;
+		const shelfLifeMonths = parseInt(document.getElementById('shelfLifeMonths').value);
+		const shelfLifeDays = parseInt(document.getElementById('shelfLifeDays').value);
 
-      // 计算过期日期
-      let expiryDate = new Date(productionDate);
-      expiryDate.setMonth(expiryDate.getMonth() + shelfLifeMonths);
+		if (productionDateValue) {
+			const productionDate = new Date(productionDateValue);
+			let expiryDate = new Date(productionDate);
 
-      // 计算距离今天的天数
-      const currentDate = new Date();
-      currentDate.setHours(0, 0, 0, 0);
-      expiryDate.setHours(0, 0, 0, 0);
-      const timeDifference = expiryDate.getTime() - currentDate.getTime();
-      const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
+			if (!isNaN(shelfLifeMonths)) {
+				expiryDate.setMonth(expiryDate.getMonth() + shelfLifeMonths);
+			} else if (!isNaN(shelfLifeDays)) {
+				expiryDate.setDate(expiryDate.getDate() + shelfLifeDays);
+			}
 
-      // 设置显示的文案和样式
-      let message;
-	  let days = `${Math.abs(daysDifference)} 天`;
-      let resultClass;
-      if (daysDifference > 0) {
-        message = `距离今天还有`;
-        resultClass = 'green';
-        document.body.style.backgroundColor = '#f9f9f9'; // 未过期，背景颜色不变
-      } else {
-        message = `已过期`;
-        resultClass = 'red';
-        document.body.style.backgroundColor = '#f2dede'; // 过期，背景颜色变红
-      }
+			// 计算距离今天的天数
+			const currentDate = new Date();
+			currentDate.setHours(0, 0, 0, 0);
+			expiryDate.setHours(0, 0, 0, 0);
+			const timeDifference = expiryDate.getTime() - currentDate.getTime();
+			const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
 
-      // 显示结果
-      document.getElementById('result').innerHTML = `
-        <div class="cards-container">
-          <div class="card expiry-card">
-            <div>过期日期是：<span class="highlight">${expiryDate.toISOString().split('T')[0]}</span></div>
-          </div>
-          <div class="card ${resultClass}">
-            <div>${message}：<span class="highlight">${days}</span></div>
-          </div>
-        </div>
-      `;
-      
-      // 显示结果容器
-      document.getElementById('result-container').style.display = 'block';
-    } else {
-      document.getElementById('result').innerHTML = '请填写所有字段';
-      document.body.style.backgroundColor = '#f9f9f9'; // 恢复初始背景颜色
-    }
-  }
+			// 设置显示的文案和样式
+			let message;
+			let days = `${Math.abs(daysDifference)} 天`;
+			let resultClass;
+			if (daysDifference > 0) {
+				message = `距离今天还有`;
+				resultClass = 'green';
+				document.body.style.backgroundColor = '#f9f9f9'; // 未过期，背景颜色不变
+			} else {
+				message = `已过期`;
+				resultClass = 'red';
+				document.body.style.backgroundColor = '#f2dede'; // 过期，背景颜色变红
+			}
+
+			// 使用formatDate函数格式化日期
+			const formattedExpiryDate = formatDate(expiryDate);
+			
+			// 显示结果
+			document.getElementById('result').innerHTML = `
+				<div class="cards-container">
+					<div class="card expiry-card">
+						<div>过期日期是：<span class="highlight">${formattedExpiryDate}</span></div>
+					</div>
+					<div class="card ${resultClass}">
+						<div>${message}：<span class="highlight">${days}</span></div>
+					</div>
+				</div>
+			`;
+			
+			// 显示结果容器
+			document.getElementById('result-container').style.display = 'block';
+		} else {
+			document.getElementById('result').innerHTML = '请填写所有字段';
+			document.body.style.backgroundColor = '#f9f9f9'; // 恢复初始背景颜色
+		}
+	}
+
+	function resetOtherSelect(changedSelectId) {
+		if (changedSelectId === 'shelfLifeMonths') {
+			document.getElementById('shelfLifeDays').value = '';
+		} else {
+			document.getElementById('shelfLifeMonths').value = '';
+		}
+		calculateExpiry();
+	}
+
+	function formatDate(date) {
+		const year = date.getFullYear();
+		const month = ('0' + (date.getMonth() + 1)).slice(-2); // 月份从0开始，所以要加1，并且保证两位数格式
+		const day = ('0' + date.getDate()).slice(-2); // 保证两位数格式
+		return `${year}年${month}月${day}日`;
+	}
+	// 在页面加载完成时设置生产日期为今日
+	window.onload = setDefaultDate;
 </script>
 </head>
 <body>
-  <div class="form-container">
-    <label for="productionDate">生产日期:</label>
-    <input type="date" id="productionDate" name="productionDate" onchange="calculateExpiry()">
-
-    <label for="shelfLife">保质期(月份):</label>
-    <select id="shelfLife" name="shelfLife" onchange="calculateExpiry()">
-	<option value="">请选择...</option>
-	<option value="1">1个月(30天)</option>
-	<option value="2">2个月(60天)</option>
-	<option value="3">3个月(90天)</option>
-	<option value="4">4个月(120天)</option>
-	<option value="5">5个月(150天)</option>
-	<option value="6">6个月(180天)</option>
-	<option value="7">7个月(210天)</option>
-	<option value="8">8个月(240天)</option>
-	<option value="9">9个月(270天)</option>
-	<option value="10">10个月(300天)</option>
-	<option value="11">11个月(330天)</option>
-	<option value="12">12个月(365天)</option>
-	<option value="13">13个月(390天)</option>
-	<option value="14">14个月(420天)</option>
-	<option value="15">15个月(450天)</option>
-	<option value="16">16个月(480天)</option>
-	<option value="17">17个月(510天)</option>
-	<option value="18">18个月(540天)</option>
-	<option value="19">19个月(570天)</option>
-	<option value="20">20个月(600天)</option>
-	<option value="21">21个月(630天)</option>
-	<option value="22">22个月(660天)</option>
-	<option value="23">23个月(690天)</option>
-	<option value="24">24个月(720天)</option>
-    </select>
-
-    <div id="result-container" style="display: none;">
-      <div id="result"></div>
+    <div class="form-container">
+        <label for="productionDate">生产日期:</label>
+        <input type="date" id="productionDate" name="productionDate" onchange="calculateExpiry()">
+        
+        <label for="shelfLifeMonths">保质期:</label>
+		<div class="select-container">
+			<select id="shelfLifeMonths" name="shelfLifeMonths" onchange="resetOtherSelect('shelfLifeMonths')">
+				<option value="">请选择月份</option>
+				<option value="1">1个月(30天)</option>
+				<option value="2">2个月(60天)</option>
+				<option value="3">3个月(90天)</option>
+				<option value="4">4个月(120天)</option>
+				<option value="5">5个月(150天)</option>
+				<option value="6">6个月(180天)</option>
+				<option value="7">7个月(210天)</option>
+				<option value="8">8个月(240天)</option>
+				<option value="9">9个月(270天)</option>
+				<option value="10">10个月(300天)</option>
+				<option value="11">11个月(330天)</option>
+				<option value="12">12个月(365天)</option>
+				<option value="13">13个月(390天)</option>
+				<option value="14">14个月(420天)</option>
+				<option value="15">15个月(450天)</option>
+				<option value="16">16个月(480天)</option>
+				<option value="17">17个月(510天)</option>
+				<option value="18">18个月(540天)</option>
+				<option value="19">19个月(570天)</option>
+				<option value="20">20个月(600天)</option>
+				<option value="21">21个月(630天)</option>
+				<option value="22">22个月(660天)</option>
+				<option value="23">23个月(690天)</option>
+				<option value="24">24个月(720天)</option>
+			</select>
+			
+			<select id="shelfLifeDays" name="shelfLifeDays" onchange="resetOtherSelect('shelfLifeDays')">
+				<option value="">请选择天数</option>
+				<option value="3">3天</option>
+				<option value="5">5天</option>
+				<option value="7">7天</option>
+				<option value="15">15天</option>
+				<option value="18">18天</option>
+				<option value="21">21天</option>
+				<option value="28">28天</option>
+				<option value="30">30天</option>
+				<option value="42">42天</option>
+				<option value="45">45天</option>
+				<option value="60">60天</option>
+				<option value="90">90天</option>
+				<option value="120">120天</option>
+				<option value="150">150天</option>
+				<option value="180">180天</option>
+				<option value="210">210天</option>
+				<option value="240">240天</option>
+				<option value="270">270天</option>
+				<option value="300">300天</option>
+				<option value="330">330天</option>
+				<option value="360">360天</option>
+				<option value="365">365天</option>
+				<option value="390">390天</option>
+				<option value="420">420天</option>
+				<option value="450">450天</option>
+				<option value="480">480天</option>
+			</select>
+	</div>
+        
+        <div id="result-container" style="display: none;">
+            <div id="result"></div>
+        </div>
     </div>
-  </div>
 </body>
 </html>
