@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>青雀的个人网站</title>
+    <title>青雀的个人网站1</title>
     <style>
         /* 新增样式 */
 
